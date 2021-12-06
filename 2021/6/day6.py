@@ -18,12 +18,6 @@ def part1():
             d.append(8)
     return len(d)
 
-def total(x, days):
-
-    if day <= x: #sus
-        return 1
-    
-
 def part2(days=256):
     d = [*data]
     c = Counter(d)
@@ -39,7 +33,7 @@ def part2(days=256):
 # grouped section yet
 def part2_alt(days=256):
     d = [*data]
-    grouped = [sum(x==i for x in data) for i in range(9)]
+    grouped = [data.count(i) for i in range(9)]
     for _ in range(days):
         cur = grouped.pop(0)
         grouped.append(cur)
