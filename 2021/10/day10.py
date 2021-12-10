@@ -36,7 +36,7 @@ def part1():
 
     bad = []
     for line in d:
-        Q = []
+        Q = deque()
         for symbol in line:
             if symbol in close and symbol != M[Q[-1]]:
                 bad.append(symbol)
@@ -56,13 +56,13 @@ def part2():
 
     line_completion = []
     for line in d:
-        Q = []
+        Q = deque()
         for i, symbol in enumerate(line):
             if symbol in close:
-                Q.pop()
+                Q.popleft()
             else:
-                Q.append(symbol)
-        line_completion.append([M[c] for c in Q[::-1]])
+                Q.appendleft(symbol)
+        line_completion.append([M[c] for c in Q])
 
     scores = []
     for line in line_completion:
