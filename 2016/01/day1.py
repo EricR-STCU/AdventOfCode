@@ -7,10 +7,11 @@ def p1_():
     x = (0,0)
 
     for i in data:
-        if i[0] == 'R':
-            d = (d+1)%4
-        else:
-            d = (d-1)%4
+        match i[0]:
+            case 'R':
+                d = (d+1)%4
+            case 'L':
+                d = (d-1)%4
         x = add(x, ds[d], int(i[1:]))
     return x, sum(abs(i) for i in x)
 
@@ -22,10 +23,11 @@ def p2_():
     seen.add(x)
 
     for i in data:
-        if i[0] == 'R':
-            d = (d+1)%4
-        else:
-            d = (d-1)%4
+        match i[0]:
+            case 'R':
+                d = (d+1)%4
+            case 'L':
+                d = (d-1)%4
         x = add_seen(x, ds[d], int(i[1:]), seen)
         if x is None:
             return
