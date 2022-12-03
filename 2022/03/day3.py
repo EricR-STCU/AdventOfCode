@@ -5,7 +5,7 @@ with open('./in.txt') as f:
 
 
 def one_liner(): #I'm sorry lol
-    return sum(ord((set(r[:len(r)//2])&set(r[len(r)//2:])).pop()) - (96 if ord((set(r[:len(r)//2])&set(r[len(r)//2:])).pop()) > 96 else 64 - 26) for r in d)
+    return sum(ord((set(r[:len(r)//2])&set(r[len(r)//2:])).pop()) - (96 if (set(r[:len(r)//2])&set(r[len(r)//2:])).pop().islower() else 64 - 26) for r in d)
 
 
 def p1():
@@ -16,7 +16,7 @@ def p1():
         b = set(r[len(r)//2:])
         common.append((a&b).pop())
     for l in common:
-        total += ord(l) - (96 if ord(l) > 96 else 64 - 26)
+        total += ord(l) - (96 if l.islower() else 64 - 26)
     return total
 
 
@@ -29,7 +29,7 @@ def p2():
         c = set(C)
         common.append((a&b&c).pop())
     for l in common:
-        total += ord(l) - (96 if ord(l) > 96 else 64 - 26)
+        total += ord(l) - (96 if l.islower() else 64 - 26)
     return total
 
 
