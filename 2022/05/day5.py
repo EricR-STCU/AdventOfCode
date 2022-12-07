@@ -5,7 +5,7 @@ with open('./in.txt') as f:
 
 
 def parse_stacks(raw):
-    stacks = [[] for i in range(9)]
+    stacks = [[] for _ in range(9)]
     for line in raw:
         for i, x in enumerate(line[1::4]):
             if x != ' ':
