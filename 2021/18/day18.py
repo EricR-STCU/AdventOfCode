@@ -109,10 +109,10 @@ class Tree():
         if type(self.L) is int and self.L >= 10:
             self.split("L")
             return True
+        if type(self.L) is Tree and self.L.try_split(): return True
         elif type(self.R) is int and self.R >= 10:
             self.split("R")
             return True
-        if type(self.L) is Tree and self.L.try_split(): return True
         if type(self.R) is Tree and self.R.try_split(): return True
         return False
     
@@ -120,6 +120,7 @@ class Tree():
     def reduce(self):
         while self.try_explode() or self.try_split():
             continue
+        return self
 
 
     def __str__(self):
@@ -132,10 +133,18 @@ def p1():
     while nums:
         t = t.add(Tree(nums.pop(0)))
         t.reduce()
-        
-    print(t)
     return t.magnitude()
+
+
+def p2():
+    highest = 0
+    for i, x in enumerate(nums[:-2]):
+        for y in nums[i+1:]:
+            highest = max(highest, Tree(x).add(Tree(y)).reduce().magnitude())
+            highest = max(highest, Tree(y).add(Tree(x)).reduce().magnitude())
+    return highest
     
 
 
+print(p2())
 print(p1())
