@@ -6,7 +6,7 @@ with open('./in.txt') as f:
     packets = []
     for pair in data.split('\n\n'):
         a, b = pair.split('\n')
-        exec(f'packets.append(({a}, {b}))')
+        packets.append((eval(a), eval(b)))
     
 
 def compare(a, b):
