@@ -15,8 +15,8 @@ o = 'AKQT98765432'
 def part1():
     data.sort(key=cmp_to_key(compare))
     total = 0
-    for i, [h, b] in enumerate(data):
-        total += (i+1) * int(b)
+    for i, [hand, bet] in enumerate(data):
+        total += (i+1) * int(bet)
     print(total)
     return
 
@@ -24,8 +24,8 @@ def part1():
 def part2():
     data.sort(key=cmp_to_key(compare2))
     total = 0
-    for i, [h, b] in enumerate(data):
-        total += (i+1) * int(b)
+    for i, [hand, bet] in enumerate(data):
+        total += (i+1) * int(bet)
     print(total)
     return
 
@@ -58,7 +58,7 @@ def rank(hand):
         return -3
     if 3 in d.values():
         return -4
-    if sum(1 if v == 2 else 0 for v in d.values()) == 2:
+    if sum(1  for v in d.values() if v == 2) == 2:
         return -5
     if 2 in d.values():
         return -6
@@ -96,7 +96,7 @@ def rank2(hand):
         return -3
     if 3 in d.values():
         return -4
-    if sum(1 if v == 2 else 0 for v in d.values()) == 2:
+    if sum(1 for v in d.values() if v == 2) == 2:
         return -5
     if 2 in d.values():
         return -6

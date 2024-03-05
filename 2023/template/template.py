@@ -1,4 +1,7 @@
-with open("in.txt") as f:
+test = False
+input_file = "in.txt"
+test_file = "test.txt"
+with open(input_file if not test else test_file) as f:
     data = f.readlines()
     
 def part1():
