@@ -1,0 +1,128 @@
+import itertools as it
+import re
+from collections import defaultdict, Counter
+
+test = True
+input_file = "in.txt"
+test_file = "test.txt"
+
+def load():
+    with open(input_file if not test else test_file) as f:
+        data = f.readlines()
+
+    data = [l.strip() for l in data]
+
+    return data
+    
+pos = lambda G, z: G[row(z)][col(z)]
+row = lambda z: int(z.real)
+col = lambda z: int(z.imag)
+
+def part1():
+    G = load()
+    info = set()
+    nodes = set()
+    chars = defaultdict(lambda: [])
+    R = len(G)
+    C = len(G[0])
+
+    for r in range(R):
+        for c in range(C):
+            if pos(G, r+1j*c) != ".":
+                chars[G[r][c]].append(r + 1j*c)
+
+    for signal, locations in chars.items():
+        
+        for a, b in it.combinations(locations, 2):
+            print(signal, a, b)
+
+            diff = b-a
+            first = b+diff
+            second = a-diff
+
+            if 0 <= first.real < R and 0 <= first.imag < C:
+                nodes.add(first)
+                info.add((signal, a, b, first))
+            if 0 <= second.real < R and 0 <= second.imag < C:
+                nodes.add(second)
+                info.add((signal, a, b, second))
+        
+    #for k, v in chars.items():
+        #print(k, v)
+    print("+++")
+    for n in info:
+        print(n)
+        
+    for r in range(R):
+        for c in range(C):
+            z = r+1j*c
+            if z in nodes:
+                print("#", end="")
+            else:
+                print(".", end="")
+        print()
+    print(len(nodes))
+    return
+
+
+def part2():
+    G = load()
+    info = set()
+    nodes = set()
+    chars = defaultdict(lambda: [])
+    R = len(G)
+    C = len(G[0])
+
+    for r in range(R):
+        for c in range(C):
+            if pos(G, r+1j*c) != ".":
+                chars[G[r][c]].append(r + 1j*c)
+
+    for signal, locations in chars.items():
+        
+        for a, b in it.combinations(locations, 2):
+            print(signal, a, b)
+
+            diff = b-a
+            first = b+diff
+            second = a-diff
+            
+            if int(diff.real) == 0 :
+                for c in range(C):
+                    nodes.add(diff.real+1j*c)
+            
+            if diff.imag == 0 :
+                for r in range(R):
+                    nodes.add(r+1j*diff.imag)
+                        
+            if diff.real == diff.imag:
+                pass
+
+
+            if 0 <= first.real < R and 0 <= first.imag < C:
+                nodes.add(first)
+                info.add((signal, a, b, first))
+            if 0 <= second.real < R and 0 <= second.imag < C:
+                nodes.add(second)
+                info.add((signal, a, b, second))
+        
+    #for k, v in chars.items():
+        #print(k, v)
+    print("+++")
+    for n in info:
+        print(n)
+        
+    for r in range(R):
+        for c in range(C):
+            z = r+1j*c
+            if z in nodes:
+                print("#", end="")
+            else:
+                print(".", end="")
+        print()
+    print(len(nodes))
+    return
+
+
+part1()
+part2()
